@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using System;
+using ReactiveUI.Avalonia;
 
 namespace Filetag;
 
@@ -13,9 +14,10 @@ sealed class Program
         .StartWithClassicDesktopLifetime(args);
 
     // Avalonia configuration, don't remove; also used by visual designer.
-    public static AppBuilder BuildAvaloniaApp()
+    private static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
-            .LogToTrace();
+            .LogToTrace()
+            .UseReactiveUI();
 }
