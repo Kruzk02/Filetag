@@ -15,7 +15,18 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+    
+    <TabControl>
+        <TabItem Header="Main">
+            <StackPanel DataContext="{Binding ReactiveViewModel}" Spacing="10">
+                <Button Content="Select File"
+                        Command="{Binding OpenFileCommand}"
+                        CommandParameter="{Binding $parent[Window]}" />
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Margin="10,20,0,0"
+                           Text="{Binding ShowSelectedFile}" />
+            </StackPanel>
+        </TabItem>
+    </TabControl>
 
 </Window>
