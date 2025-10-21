@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -22,7 +23,10 @@ public class ReactiveViewModel : ReactiveObject
     }
     
     private string? _selectedFile;
-    public string? SelectedFile
+
+    public ObservableCollection<string> Items { get; } = [];
+
+    private string? SelectedFile
     {
         get => _selectedFile;
         set => this.RaiseAndSetIfChanged(ref _selectedFile, value);
@@ -35,5 +39,6 @@ public class ReactiveViewModel : ReactiveObject
         var filePickerService = new FilePickerService(window);
         var files = await filePickerService.PickFileAsync();
         SelectedFile = files[0].Name;
+        Items.Add(SelectedFile);
     }
 }

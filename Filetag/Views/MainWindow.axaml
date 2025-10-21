@@ -23,8 +23,7 @@
                         Command="{Binding OpenFileCommand}"
                         CommandParameter="{Binding $parent[Window]}" />
 
-                <TextBlock Margin="10,20,0,0"
-                           Text="{Binding ShowSelectedFile}" />
+                <ListBox ItemsSource="{Binding Items}" />
             </StackPanel>
         </TabItem>
     </TabControl>
