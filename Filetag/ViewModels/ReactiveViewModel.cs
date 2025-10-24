@@ -22,23 +22,29 @@ public class ReactiveViewModel : ReactiveObject
             .Subscribe(_ => this.RaisePropertyChanged(nameof(ShowSelectedFile)));
     }
     
-    private string? _selectedFile;
+    private IStorageFile? _selectedFile;
 
-    public ObservableCollection<string> Items { get; } = [];
+    public ObservableCollection<IStorageFile> Items { get; } = [];
 
-    private string? SelectedFile
+    private IStorageFile? SelectedFile
     {
         get => _selectedFile;
         set => this.RaiseAndSetIfChanged(ref _selectedFile, value);
     }
 
-    public string ShowSelectedFile => string.IsNullOrEmpty(SelectedFile) ? "No file selected" : $"Selected File {SelectedFile}";
+    public string ShowSelectedFile => 
+        SelectedFile == null ? 
+            "No file selected" :
+            $"Selected File {SelectedFile}";
 
     private async Task OpenFileDialogAsync(Window window)
     {
         var filePickerService = new FilePickerService(window);
         var files = await filePickerService.PickFileAsync();
-        SelectedFile = files[0].Name;
-        Items.Add(SelectedFile);
+        if (files.Count > 0)
+        {
+            SelectedFile = files[0];
+            Items.Add(files[0]);
+        }
     }
 }

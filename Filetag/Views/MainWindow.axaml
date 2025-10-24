@@ -23,7 +23,16 @@
                         Command="{Binding OpenFileCommand}"
                         CommandParameter="{Binding $parent[Window]}" />
 
-                <ListBox ItemsSource="{Binding Items}" />
+                <ListBox ItemsSource="{Binding Items}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Path}" Foreground="Gray" FontSize="11"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </TabItem>
     </TabControl>
